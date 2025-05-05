@@ -1,0 +1,19 @@
+name: Ejecutar pruebas Postman con Newman
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Instalar Node.js
+        uses: actions/setup-node@v2
+      - name: Instalar Newman
+        run: npm install -g newman
+      - name: Ejecutar colección de Postman
+        run: newman run postman/MiColeccion.postman_collection.json
